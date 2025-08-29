@@ -1,0 +1,680 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Vill - Obstetrics & Gynecology Pharmaceuticals</title>
+    <!-- Font Awesome for line icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* Variables for Premium Minimalist Design */
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(230, 232, 235, 0.9); /* A subtle, solid-like border */
+            --glass-shadow: rgba(31, 41, 55, 0.08);
+            --blur-intensity: 20px;
+            --main-text-color: #1f2937;
+            --secondary-text-color: #4b5563;
+            --accent-color: #3b82f6;
+            --accent-color-dark: #2563eb;
+            --background-color: #f9fafb;
+            --dark-footer-background: #111827;
+            /* Fluid Typography */
+            --font-size-h1: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+            --font-size-h2: clamp(2rem, 4vw + 0.8rem, 3rem);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--main-text-color);
+            background-color: var(--background-color);
+            background-image: radial-gradient(circle at 50% 0%, #ffffff 0%, #f9fafb 70%);
+            min-height: 100vh;
+        }
+
+        body.no-scroll { overflow: hidden; }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* --- Animations & Microinteractions --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal.visible.staggered-1 { transition-delay: 100ms; }
+        .reveal.visible.staggered-2 { transition-delay: 200ms; }
+        .reveal.visible.staggered-3 { transition-delay: 300ms; }
+        .reveal.visible.staggered-4 { transition-delay: 400ms; }
+        .reveal.visible.staggered-5 { transition-delay: 500ms; }
+        .reveal.visible.staggered-6 { transition-delay: 600ms; }
+
+        /* --- Header --- */
+        header {
+            background: var(--glass-bg);
+            padding: 1.25rem 0;
+            position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+            backdrop-filter: blur(var(--blur-intensity));
+            -webkit-backdrop-filter: blur(var(--blur-intensity));
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.75rem; font-weight: 600; letter-spacing: -0.02em; }
+        .nav-links { display: flex; list-style: none; gap: 3rem; }
+        .nav-links a {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 0.25rem;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 2px;
+            background: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .nav-links a:hover { color: var(--main-text-color); }
+        .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+        /* --- Buttons --- */
+        .cta-btn {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none; border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        .cta-btn:hover {
+            background: var(--accent-color-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+        }
+        .cta-btn:active { transform: translateY(0) scale(0.98); }
+
+        /* --- Mobile Navigation --- */
+        .mobile-nav-toggle { display: none; background: none; border: none; cursor: pointer; z-index: 1001; }
+        .mobile-nav-toggle .fa-bars, .mobile-nav-toggle .fa-times { font-size: 1.5rem; color: var(--main-text-color); }
+        .mobile-nav-toggle .fa-times { display: none; }
+
+        /* --- Hero Section --- */
+        .hero { padding: 120px 0; text-align: center; }
+        .hero h1 { font-size: var(--font-size-h1); font-weight: 400; letter-spacing: -0.04em; }
+        .hero p { font-size: 1.25rem; margin: 1.5rem auto 3rem; color: var(--secondary-text-color); max-width: 600px; line-height: 1.6; }
+        .hero-cta { padding: 1.2rem 2.5rem; font-size: 1rem; border-radius: 8px; }
+
+        /* --- General Section & Card Styling --- */
+        .section { padding: 120px 0; }
+        .section.bg-white { background: white; }
+        .section-header { text-align: center; margin-bottom: 4rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .section-header h2 { font-size: var(--font-size-h2); font-weight: 300; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .section-header p { font-size: 1.1rem; color: var(--secondary-text-color); }
+        
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur-intensity));
+            -webkit-backdrop-filter: blur(var(--blur-intensity));
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 35px var(--glass-shadow);
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+            border: 1px solid var(--glass-border);
+            overflow: hidden; /* Important for the gradient pseudo-element */
+        }
+        .glass-card::after { /* Using ::after for the mouse-follow gradient */
+            content: "";
+            position: absolute;
+            left: var(--x, 50%);
+            top: var(--y, 50%);
+            width: 400px;
+            height: 400px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        .glass-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 45px rgba(31, 41, 55, 0.12);
+            border-color: #d1d5db;
+        }
+        .glass-card:hover::after {
+            opacity: 1;
+        }
+
+
+        /* --- Specific Section Layouts --- */
+        .services-grid, .process-grid, .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .service-card, .process-step, .benefit-card { text-align: center; }
+        .service-icon, .benefit-icon { font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent-color); }
+        .service-card h3, .process-step h3, .benefit-card h3 { font-size: 1.25rem; font-weight: 500; margin-bottom: 0.5rem; }
+
+        .quality-content, .coverage-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            align-items: center;
+        }
+        .quality-text h2, .coverage-text h2 { font-size: var(--font-size-h2); font-weight: 300; margin-bottom: 1.5rem; }
+        .quality-text p, .coverage-list { font-size: 1.1rem; color: var(--secondary-text-color); }
+        .quality-graphic, .coverage-graphic { text-align: center; }
+        .quality-graphic .fas, .coverage-graphic .fas { font-size: 3rem; margin-bottom: 1rem; color: var(--accent-color); }
+
+        .coverage-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+        .coverage-list li { display: flex; align-items: center; gap: 0.75rem; }
+        .coverage-list .fa-check-circle { color: var(--accent-color); }
+        
+        .step-number {
+            background: var(--accent-color); color: white;
+            width: 50px; height: 50px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem; font-size: 1.25rem; font-weight: 600;
+        }
+
+        .product-tabs { display: flex; justify-content: center; margin-bottom: 4rem; gap: 1rem; flex-wrap: wrap; }
+        .tab-btn { background: #f3f4f6; color: var(--secondary-text-color); border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-weight: 500; }
+        .tab-btn.active, .tab-btn:hover { background: var(--accent-color); color: white; transform: translateY(-2px); }
+        .medicine-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; transition: opacity 0.3s ease; }
+        .medicine-grid.fading-out { opacity: 0; }
+        .medicine-card { padding: 2rem; }
+        .medicine-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+        .medicine-name { font-size: 1.25rem; font-weight: 600; }
+        .medicine-price { background: var(--accent-color); color: white; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 500; }
+        .add-to-cart {
+            background: var(--main-text-color); color: white; border: none; padding: 0.75rem 1.25rem; border-radius: 8px;
+            cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease; font-weight: 500; overflow: hidden; position: relative; width: 120px; text-align: center;
+        }
+        .add-to-cart .text, .add-to-cart .icon { display: inline-block; transition: transform 0.3s ease, opacity 0.3s ease; }
+        .add-to-cart .icon { position: absolute; left: 50%; top: 50%; transform: translate(-50%, 200%); opacity: 0; font-size: 1.2rem; }
+        .add-to-cart.added .text { transform: translateY(-200%); opacity: 0; }
+        .add-to-cart.added .icon { transform: translate(-50%, -50%); opacity: 1; }
+
+        .final-cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color-dark) 100%);
+            color: white; text-align: center; border-radius: 24px;
+        }
+        .final-cta h2 { font-size: var(--font-size-h2); font-weight: 400; margin-bottom: 1rem; }
+        .final-cta p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; }
+        .final-cta-btn { background: white; color: var(--accent-color); }
+        
+        .faq-list { max-width: 768px; margin: 0 auto; }
+        .faq-item { border: 1px solid #e5e7eb; border-radius: 12px; margin-bottom: 1rem; transition: all 0.3s ease; }
+        .faq-item:hover { border-color: var(--accent-color); transform: scale(1.02); }
+        .faq-question { padding: 1.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 500; font-size: 1.1rem; }
+        .faq-icon { transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1); color: var(--accent-color); }
+        .faq-answer-wrapper { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
+        .faq-answer { overflow: hidden; }
+        .faq-answer p { padding: 0 1.5rem 1.5rem; color: var(--secondary-text-color); }
+        .faq-item.open .faq-icon { transform: rotate(180deg); }
+        .faq-item.open .faq-answer-wrapper { grid-template-rows: 1fr; }
+
+        footer { background: var(--dark-footer-background); color: #e5e7eb; padding: 4rem 0 2rem; margin-top: auto; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+        .footer-section h3 { color: white; }
+        .footer-section p, .footer-section a { color: #9ca3af; }
+        .footer-section ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+        .footer-section a:hover { color: var(--accent-color); }
+        .footer-bottom { border-top: 1px solid #374151; padding-top: 2rem; text-align: center; color: #9ca3af; }
+
+        @media (max-width: 768px) {
+            .cta-btn { display: none; }
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+                background: var(--glass-bg); backdrop-filter: blur(var(--blur-intensity));
+                flex-direction: column; justify-content: center; align-items: center;
+                gap: 2.5rem; transition: right 0.4s ease-in-out;
+            }
+            .nav-links.mobile-visible { right: 0; }
+            .nav-links a { font-size: 1.5rem; color: var(--main-text-color); }
+            .mobile-nav-toggle { display: block; }
+            .nav-open .fa-bars { display: none; }
+            .nav-open .fa-times { display: block; }
+            .section { padding: 80px 0; }
+            .hero { padding: 100px 0 60px; }
+            .hero p { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">The Vill</div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.htm">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="marketplace.html">Marketplace</a></li>
+            </ul>
+            <button class="cta-btn">Get Quote</button>
+            <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-times"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container reveal">
+                <h1>Premium Gynecological Pharmaceuticals</h1>
+                <p>Advanced, FDA-approved solutions for every stage of women's health, delivered with care and precision.</p>
+                <button class="hero-cta cta-btn">Explore Medications</button>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Our Specializations</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card glass-card reveal staggered-1">
+                        <div class="service-icon"><i class="fas fa-venus"></i></div>
+                        <h3>Hormonal Therapies</h3>
+                        <p>Advanced treatments for PCOS, endometriosis, and menopause.</p>
+                    </div>
+                    <div class="service-card glass-card reveal staggered-2">
+                        <div class="service-icon"><i class="fas fa-baby"></i></div>
+                        <h3>Reproductive Health</h3>
+                        <p>A comprehensive range of contraceptives and fertility solutions.</p>
+                    </div>
+                    <div class="service-card glass-card reveal staggered-3">
+                        <div class="service-icon"><i class="fas fa-hand-holding-medical"></i></div>
+                        <h3>Maternal Care</h3>
+                        <p>Essential prenatal vitamins and postpartum support medications.</p>
+                    </div>
+                     <div class="service-card glass-card reveal staggered-4">
+                        <div class="service-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <h3>Menstrual Disorders</h3>
+                        <p>Effective management for pain, cycle regulation, and related conditions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bg-white">
+            <div class="container">
+                <div class="quality-content">
+                    <div class="quality-text reveal">
+                        <h2>Uncompromising Quality, Trusted Results</h2>
+                        <p>We partner with leading pharmaceutical companies to provide FDA-approved, high-quality medications. All our products undergo rigorous testing to meet the highest international standards.</p>
+                    </div>
+                    <div class="quality-graphic glass-card reveal staggered-1">
+                        <i class="fas fa-award"></i>
+                        <h3>Quality Assured</h3>
+                        <p>Certified & FDA-approved medications</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Our Simple, Guided Process</h2>
+                    <p>We provide a seamless and supportive experience from initial consultation to ongoing care.</p>
+                </div>
+                <div class="process-grid">
+                    <div class="process-step glass-card reveal staggered-1">
+                        <div class="step-number">01</div>
+                        <h3>Assessment</h3>
+                        <p>A thorough health evaluation and medical history review.</p>
+                    </div>
+                    <div class="process-step glass-card reveal staggered-2">
+                        <div class="step-number">02</div>
+                        <h3>Consultation</h3>
+                        <p>Personalized consultation to define the best treatment plan.</p>
+                    </div>
+                    <div class="process-step glass-card reveal staggered-3">
+                        <div class="step-number">03</div>
+                        <h3>Prescription</h3>
+                        <p>Custom medication prescription with detailed guidance.</p>
+                    </div>
+                    <div class="process-step glass-card reveal staggered-4">
+                        <div class="step-number">04</div>
+                        <h3>Support</h3>
+                        <p>Regular follow-ups and continuous support for any questions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="section bg-white">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Medicine Marketplace</h2>
+                </div>
+                <div class="product-tabs reveal">
+                    <button class="tab-btn active" data-tab="contraceptive">Contraceptive</button>
+                    <button class="tab-btn" data-tab="hormonal">Hormonal Therapy</button>
+                    <button class="tab-btn" data-tab="fertility">Fertility</button>
+                    <button class="tab-btn" data-tab="prenatal">Prenatal Care</button>
+                </div>
+                <div class="medicine-grid" id="medicine-content">
+                    <!-- JS Populated -->
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="container">
+                 <div class="coverage-content">
+                     <div class="coverage-graphic glass-card reveal">
+                        <i class="fas fa-user-md"></i>
+                        <h3>Expert Care</h3>
+                        <p>Specialized treatments for women's health</p>
+                    </div>
+                    <div class="coverage-text reveal staggered-1">
+                        <h2>End-to-End Coverage</h2>
+                        <ul class="coverage-list">
+                            <li><i class="fas fa-check-circle"></i>Hormonal birth control options</li>
+                            <li><i class="fas fa-check-circle"></i>PCOS management medications</li>
+                            <li><i class="fas fa-check-circle"></i>Endometriosis treatments</li>
+                            <li><i class="fas fa-check-circle"></i>Fertility enhancement drugs</li>
+                            <li><i class="fas fa-check-circle"></i>Menopause hormone therapy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bg-white">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Why Choose The Vill?</h2>
+                </div>
+                <div class="benefits-grid">
+                    <div class="benefit-card glass-card reveal staggered-1">
+                        <div class="benefit-icon"><i class="fas fa-user-nurse"></i></div>
+                        <h3>Expert Specialists</h3>
+                    </div>
+                    <div class="benefit-card glass-card reveal staggered-2">
+                        <div class="benefit-icon"><i class="fas fa-pills"></i></div>
+                        <h3>Quality Medications</h3>
+                    </div>
+                    <div class="benefit-card glass-card reveal staggered-3">
+                        <div class="benefit-icon"><i class="fas fa-truck"></i></div>
+                        <h3>Discreet Delivery</h3>
+                    </div>
+                    <div class="benefit-card glass-card reveal staggered-4">
+                        <div class="benefit-icon"><i class="fas fa-lock"></i></div>
+                        <h3>Confidential Care</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <div class="container reveal">
+                <div class="final-cta">
+                    <h2>Make Your Health Effortless Today</h2>
+                    <p>Join thousands of healthcare providers who trust The Vill for premium medications.</p>
+                    <button class="final-cta-btn cta-btn">Get Started Now</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>What Our Partners Say</h2>
+                    <p>We are proud to be a trusted partner for healthcare providers across the nation.</p>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card glass-card reveal staggered-1">
+                        <p class="testimonial-text">"The Vill has transformed how we source gynecological medications. Their quality and reliability are unmatched, and their support team is always responsive. Our patients have benefited immensely."</p>
+                        <div class="testimonial-author">
+                            <h4>Dr. Sarah Johnson</h4>
+                            <span>Chief of Obstetrics, City General Hospital</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-card reveal staggered-2">
+                        <p class="testimonial-text">"As a private practitioner, having a dependable pharmaceutical supplier is critical. The Vill's seamless ordering process and discreet, timely delivery have made them an indispensable part of my clinic's success."</p>
+                        <div class="testimonial-author">
+                            <h4>Dr. Emily Chen</h4>
+                            <span>Owner, Women's Health Clinic</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card glass-card reveal staggered-3">
+                        <p class="testimonial-text">"The breadth of their product line, from reproductive health to maternal care, is exceptional. I can always find the right, high-quality medication for my patients' unique needs. I highly recommend The Vill."</p>
+                        <div class="testimonial-author">
+                            <h4>Dr. David Martinez</h4>
+                            <span>Head of Gynecology, Metro Health System</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section bg-white">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Frequently Asked Questions</h2>
+                </div>
+                <div class="faq-list">
+                    <div class="faq-item reveal staggered-1">
+                        <div class="faq-question">
+                            <span>What types of birth control do you provide?</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                                <p>We offer a full spectrum of hormonal contraceptives, including combined oral contraceptives (COCs), progestin-only pills (POPs), hormonal IUDs, patches, and injectables to suit diverse patient needs and preferences.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item reveal staggered-2">
+                        <div class="faq-question">
+                            <span>Are your medications FDA approved?</span>
+                             <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                         <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                               <p>Absolutely. All our medications are FDA-approved and sourced from leading, reputable pharmaceutical manufacturers. We adhere to the highest standards of quality, safety, and efficacy for all our products.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq-item reveal staggered-3">
+                        <div class="faq-question">
+                            <span>Do you offer hormone replacement therapy (HRT)?</span>
+                             <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                         <div class="faq-answer-wrapper">
+                            <div class="faq-answer">
+                               <p>Yes, we provide comprehensive and individualized hormone replacement therapies for managing menopause symptoms, including tailored estrogen and progesterone treatments designed for optimal patient outcomes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>The Vill</h3>
+                    <p>Pioneering the future of women's pharmaceutical care.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.htm">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="marketplace.html">Marketplace</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>1-800-FEM-CARE</li>
+                        <li>info@thervill.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 The Vill Pharmaceuticals. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- DATA ---
+            const medicines = {
+                contraceptive: [{ name: "Yasmin", generic: "Drospirenone + Ethinyl Estradiol", price: "$45.99"}, { name: "Mirena IUD", generic: "Levonorgestrel IUS", price: "$899.99"}, { name: "Plan B One-Step", generic: "Levonorgestrel", price: "$49.99"}, { name: "NuvaRing", generic: "Etonogestrel/Ethinyl Estradiol", price: "$199.99"}],
+                hormonal: [{ name: "Premarin", generic: "Conjugated Estrogens", price: "$156.99"}, { name: "Prometrium", generic: "Progesterone", price: "$89.99"}, { name: "Lupron Depot", generic: "Leuprolide Acetate", price: "$1,299.99"}, { name: "Spironolactone", generic: "Spironolactone", price: "$35.99"}],
+                fertility: [{ name: "Clomid", generic: "Clomiphene Citrate", price: "$67.99"}, { name: "Gonal-F", generic: "Follitropin Alfa", price: "$879.99"}, { name: "Ovidrel", generic: "Choriogonadotropin Alfa", price: "$289.99"}, { name: "Letrozole", generic: "Letrozole", price: "$43.99"}],
+                prenatal: [{ name: "PregVit", generic: "Prenatal Vitamins + DHA", price: "$34.99"}, { name: "Diclegis", generic: "Doxylamine/Pyridoxine", price: "$178.99"}, { name: "Makena", generic: "Hydroxyprogesterone", price: "$689.99"}, { name: "Iron Sulfate", generic: "Ferrous Sulfate", price: "$12.99"}]
+            };
+
+            // --- MOBILE NAVIGATION ---
+            const navToggle = document.getElementById('mobile-nav-toggle');
+            const navLinks = document.getElementById('nav-links');
+            const toggleNav = () => {
+                navLinks.classList.toggle('mobile-visible');
+                document.body.classList.toggle('no-scroll');
+                navToggle.classList.toggle('nav-open');
+            };
+            navToggle.addEventListener('click', toggleNav);
+            navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+                if (navLinks.classList.contains('mobile-visible')) toggleNav();
+            }));
+
+            // --- ON-SCROLL REVEAL ANIMATION ---
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+            
+            // --- MOUSE-FOLLOW GRADIENT ---
+            document.querySelectorAll('.glass-card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--x', `${x}px`);
+                    card.style.setProperty('--y', `${y}px`);
+                });
+            });
+
+            // --- MEDICINE MARKETPLACE ---
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const medicineContent = document.getElementById('medicine-content');
+
+            const createMedicineCard = (med, index) => `
+                <div class="medicine-card glass-card reveal staggered-${index + 1}">
+                    <div class="medicine-header">
+                        <div>
+                            <div class="medicine-name">${med.name}</div>
+                            <div class="medicine-generic">${med.generic}</div>
+                        </div>
+                        <div class="medicine-price">${med.price}</div>
+                    </div>
+                    <button class="add-to-cart">
+                        <span class="text">Add to Cart</span>
+                        <span class="icon"><i class="fas fa-check"></i></span>
+                    </button>
+                </div>`;
+
+            const displayMedicines = (category) => {
+                const medicineList = medicines[category] || [];
+                if (!medicineContent) return;
+                
+                medicineContent.classList.add('fading-out');
+                setTimeout(() => {
+                    medicineContent.innerHTML = medicineList.map((med, i) => createMedicineCard(med, i)).join('');
+                    medicineContent.classList.remove('fading-out');
+                    medicineContent.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+                    // Re-apply mouse-follow effect to new cards
+                    medicineContent.querySelectorAll('.glass-card').forEach(card => {
+                        card.addEventListener('mousemove', e => {
+                            const rect = card.getBoundingClientRect();
+                            const x = e.clientX - rect.left;
+                            const y = e.clientY - rect.top;
+                            card.style.setProperty('--x', `${x}px`);
+                            card.style.setProperty('--y', `${y}px`);
+                        });
+                    });
+                }, 300);
+            };
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (button.classList.contains('active')) return;
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    displayMedicines(button.dataset.tab);
+                });
+            });
+
+            medicineContent.addEventListener('click', (e) => {
+                const button = e.target.closest('.add-to-cart');
+                if (button && !button.classList.contains('added')) {
+                    button.classList.add('added');
+                    setTimeout(() => button.classList.remove('added'), 2000);
+                }
+            });
+
+            displayMedicines('contraceptive');
+
+            // --- FAQ ACCORDION ---
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const wasOpen = item.classList.contains('open');
+                    faqItems.forEach(i => i.classList.remove('open'));
+                    if (!wasOpen) item.classList.add('open');
+                });
+            });
+        });
+    </script>
+
+<script src="https://static.app/js/static.js" type="text/javascript"></script>
+</body>
+</html>

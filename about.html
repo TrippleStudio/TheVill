@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - The Vill</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(230, 232, 235, 0.9);
+            --glass-shadow: rgba(31, 41, 55, 0.08);
+            --blur-intensity: 20px;
+            --main-text-color: #1f2937;
+            --secondary-text-color: #4b5563;
+            --accent-color: #3b82f6;
+            --accent-color-dark: #2563eb;
+            --background-color: #f9fafb;
+            --dark-footer-background: #111827;
+            --font-size-h1: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+            --font-size-h2: clamp(2rem, 4vw + 0.8rem, 3rem);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.7; color: var(--main-text-color); background-color: var(--background-color); background-image: radial-gradient(circle at 50% 0%, #ffffff 0%, #f9fafb 70%); min-height: 100vh; }
+        body.no-scroll { overflow: hidden; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal.visible.staggered-1 { transition-delay: 100ms; }
+        .reveal.visible.staggered-2 { transition-delay: 200ms; }
+        .reveal.visible.staggered-3 { transition-delay: 300ms; }
+        header { background: var(--glass-bg); padding: 1.25rem 0; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--glass-border); backdrop-filter: blur(var(--blur-intensity)); -webkit-backdrop-filter: blur(var(--blur-intensity)); }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.75rem; font-weight: 600; letter-spacing: -0.02em; }
+        .nav-links { display: flex; list-style: none; gap: 3rem; }
+        .nav-links a { color: var(--secondary-text-color); text-decoration: none; transition: color 0.3s ease; font-weight: 500; position: relative; padding-bottom: 0.25rem; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--accent-color); transform: scaleX(0); transform-origin: right; transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1); }
+        .nav-links a:hover { color: var(--main-text-color); }
+        .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+        .cta-btn { background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-weight: 500; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2); }
+        .cta-btn:hover { background: var(--accent-color-dark); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3); }
+        .mobile-nav-toggle { display: none; background: none; border: none; cursor: pointer; z-index: 1001; }
+        .mobile-nav-toggle .fa-bars, .mobile-nav-toggle .fa-times { font-size: 1.5rem; color: var(--main-text-color); }
+        .mobile-nav-toggle .fa-times { display: none; }
+        .page-header { padding: 100px 0; text-align: center; background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0)), radial-gradient(circle at 50% 0%, #ffffff 0%, #f9fafb 70%); }
+        .page-header h1 { font-size: var(--font-size-h1); font-weight: 400; letter-spacing: -0.04em; }
+        .page-header p { font-size: 1.25rem; margin-top: 1rem; color: var(--secondary-text-color); max-width: 600px; margin-left: auto; margin-right: auto; }
+        .section { padding: 100px 0; }
+        .section.bg-white { background: white; }
+        .section-header { text-align: center; margin-bottom: 4rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .section-header h2 { font-size: var(--font-size-h2); font-weight: 300; letter-spacing: -0.02em; margin-bottom: 1rem; }
+        .section-header p { font-size: 1.1rem; color: var(--secondary-text-color); }
+        .glass-card { background: var(--glass-bg); backdrop-filter: blur(var(--blur-intensity)); -webkit-backdrop-filter: blur(var(--blur-intensity)); border-radius: 24px; padding: 2.5rem; box-shadow: 0 10px 35px var(--glass-shadow); transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1); position: relative; border: 1px solid var(--glass-border); overflow: hidden; }
+        .glass-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 45px rgba(31, 41, 55, 0.12); border-color: #d1d5db; }
+        .certifications-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; text-align: center; }
+        .certification-card { padding: 2rem; }
+        .certification-icon { font-size: 3rem; margin-bottom: 1rem; color: var(--accent-color); }
+        .certification-card h3 { font-size: 1.25rem; font-weight: 500; }
+        .founder-section { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: center; }
+        .founder-photo { width: 100%; max-width: 300px; border-radius: 24px; box-shadow: 0 10px 35px var(--glass-shadow); }
+        .founder-bio h2 { font-size: var(--font-size-h2); font-weight: 300; margin-bottom: 1.5rem; }
+        .founder-bio p { font-size: 1.1rem; color: var(--secondary-text-color); margin-bottom: 1rem; }
+        .vision-mission { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; }
+        .vision-mission-card h3 { font-size: 1.5rem; font-weight: 500; margin-bottom: 1rem; color: var(--accent-color); }
+        footer { background: var(--dark-footer-background); color: #e5e7eb; padding: 4rem 0 2rem; margin-top: auto; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+        .footer-section h3 { color: white; }
+        .footer-section p, .footer-section a { color: #9ca3af; }
+        .footer-section ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+        .footer-section a:hover { color: var(--accent-color); }
+        .footer-bottom { border-top: 1px solid #374151; padding-top: 2rem; text-align: center; color: #9ca3af; }
+        @media (max-width: 768px) {
+            .cta-btn { display: none; }
+            .nav-links { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background: var(--glass-bg); backdrop-filter: blur(var(--blur-intensity)); flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem; transition: right 0.4s ease-in-out; }
+            .nav-links.mobile-visible { right: 0; }
+            .nav-links a { font-size: 1.5rem; color: var(--main-text-color); }
+            .mobile-nav-toggle { display: block; }
+            .nav-open .fa-bars { display: none; }
+            .nav-open .fa-times { display: block; }
+            .founder-section { grid-template-columns: 1fr; text-align: center; }
+            .founder-photo { margin: 0 auto 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">The Vill</div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.htm">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="marketplace.html">Marketplace</a></li>
+            </ul>
+            <button class="cta-btn">Get Quote</button>
+            <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-times"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container reveal">
+                <h1>About The Vill</h1>
+                <p>Pioneering the future of women's health with compassion, innovation, and unwavering commitment to quality.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Our Commitment to Excellence</h2>
+                    <p>The Vill is built on a foundation of trust, scientific rigor, and a deep understanding of women's health needs. We are dedicated to providing healthcare professionals and patients with pharmaceuticals that are not only effective but also safe and accessible. Our journey is one of relentless pursuit of excellence, from research and development to the delivery of every single product.</p>
+                </div>
+                <div class="certifications-grid">
+                    <div class="certification-card glass-card reveal staggered-1">
+                        <div class="certification-icon"><i class="fas fa-award"></i></div>
+                        <h3>ISO Certified</h3>
+                        <p>Adhering to international standards for quality management.</p>
+                    </div>
+                    <div class="certification-card glass-card reveal staggered-2">
+                        <div class="certification-icon"><i class="fas fa-globe"></i></div>
+                        <h3>WHO Certified</h3>
+                        <p>Recognized for meeting global health and safety protocols.</p>
+                    </div>
+                    <div class="certification-card glass-card reveal staggered-3">
+                        <div class="certification-icon"><i class="fas fa-check-circle"></i></div>
+                        <h3>GMP Certified</h3>
+                        <p>Ensuring consistent quality and purity in manufacturing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bg-white">
+            <div class="container">
+                <div class="founder-section">
+                    <div class="reveal">
+                        <img src="https://via.placeholder.com/300" alt="Amit Gupta, Founder" class="founder-photo">
+                    </div>
+                    <div class="founder-bio reveal staggered-1">
+                        <h2>Meet Our Founder</h2>
+                        <p><strong>Amit Gupta</strong>, a visionary leader with over two decades of experience in the pharmaceutical industry, founded The Vill with a singular mission: to revolutionize women's healthcare. After a distinguished career at leading global pharma companies, Amit was driven by the need for a more focused, patient-centric approach to gynecological and obstetric medicine. He envisioned a company that would not just sell products, but would build a legacy of trust and empowerment for women everywhere.</p>
+                        <p>Amit's expertise in clinical research and his passion for innovation have been instrumental in shaping The Vill's product portfolio and its unwavering commitment to quality.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="vision-mission">
+                    <div class="vision-mission-card glass-card reveal">
+                        <h3>Our Vision</h3>
+                        <p>To be the most trusted and respected name in women's pharmaceuticals globally, empowering healthier lives through innovative and accessible healthcare solutions.</p>
+                    </div>
+                    <div class="vision-mission-card glass-card reveal staggered-1">
+                        <h3>Our Mission</h3>
+                        <p>To develop, manufacture, and deliver the highest quality pharmaceuticals for obstetrics and gynecology, while upholding the highest standards of ethics, integrity, and patient-centric care.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>The Vill</h3>
+                    <p>Pioneering the future of women's pharmaceutical care.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.htm">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="marketplace.html">Marketplace</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>1-800-FEM-CARE</li>
+                        <li>info@thervill.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 The Vill Pharmaceuticals. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navToggle = document.getElementById('mobile-nav-toggle');
+            const navLinks = document.getElementById('nav-links');
+            const toggleNav = () => {
+                navLinks.classList.toggle('mobile-visible');
+                document.body.classList.toggle('no-scroll');
+                navToggle.classList.toggle('nav-open');
+            };
+            navToggle.addEventListener('click', toggleNav);
+            navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+                if (navLinks.classList.contains('mobile-visible')) toggleNav();
+            }));
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        });
+    </script>
+</body>
+</html>
