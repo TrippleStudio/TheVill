@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +10,8 @@
         /* Variables for Premium Minimalist Design */
         :root {
             --glass-bg: rgba(255, 255, 255, 0.8);
-            --glass-border: rgba(230, 232, 235, 0.9); /* A subtle, solid-like border */
-            --glass-shadow: rgba(31, 41, 55, 0.08);
+            --glass-border: rgba(209, 213, 219, 1); /* More opaque border */
+            --glass-shadow: rgba(31, 41, 55, 0.1); /* Darker shadow */
             --blur-intensity: 20px;
             --main-text-color: #1f2937;
             --secondary-text-color: #4b5563;
@@ -146,7 +145,7 @@
             -webkit-backdrop-filter: blur(var(--blur-intensity));
             border-radius: 24px;
             padding: 2.5rem;
-            box-shadow: 0 10px 35px var(--glass-shadow);
+            box-shadow: 0 10px 15px -3px var(--glass-shadow), 0 4px 6px -2px var(--glass-shadow);
             transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
             position: relative;
             border: 1px solid var(--glass-border);
@@ -167,8 +166,8 @@
         }
         .glass-card:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 45px rgba(31, 41, 55, 0.12);
-            border-color: #d1d5db;
+            box-shadow: 0 25px 50px -12px rgba(31, 41, 55, 0.25);
+            border-color: #a5b4fc;
         }
         .glass-card:hover::after {
             opacity: 1;
@@ -182,6 +181,27 @@
             gap: 2rem;
         }
         .service-card, .process-step, .benefit-card { text-align: center; }
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+        }
+        .founder-card {
+            text-align: center;
+        }
+        .founder-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+        }
+        .founder-info h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
         .service-icon, .benefit-icon { font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent-color); }
         .service-card h3, .process-step h3, .benefit-card h3 { font-size: 1.25rem; font-weight: 500; margin-bottom: 0.5rem; }
 
@@ -210,20 +230,21 @@
         .product-tabs { display: flex; justify-content: center; margin-bottom: 4rem; gap: 1rem; flex-wrap: wrap; }
         .tab-btn { background: #f3f4f6; color: var(--secondary-text-color); border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-weight: 500; }
         .tab-btn.active, .tab-btn:hover { background: var(--accent-color); color: white; transform: translateY(-2px); }
-        .medicine-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; transition: opacity 0.3s ease; }
+        .medicine-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; transition: opacity 0.3s ease; }
         .medicine-grid.fading-out { opacity: 0; }
         .medicine-card { padding: 2rem; }
         .medicine-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
-        .medicine-name { font-size: 1.25rem; font-weight: 600; }
-        .medicine-price { background: var(--accent-color); color: white; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 500; }
-        .add-to-cart {
-            background: var(--main-text-color); color: white; border: none; padding: 0.75rem 1.25rem; border-radius: 8px;
-            cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease; font-weight: 500; overflow: hidden; position: relative; width: 120px; text-align: center;
-        }
-        .add-to-cart .text, .add-to-cart .icon { display: inline-block; transition: transform 0.3s ease, opacity 0.3s ease; }
-        .add-to-cart .icon { position: absolute; left: 50%; top: 50%; transform: translate(-50%, 200%); opacity: 0; font-size: 1.2rem; }
-        .add-to-cart.added .text { transform: translateY(-200%); opacity: 0; }
-        .add-to-cart.added .icon { transform: translate(-50%, -50%); opacity: 1; }
+        .medicine-name { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .medicine-generic { color: var(--secondary-text-color); font-size: 0.9rem; }
+        .medicine-price { font-size: 1.1rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; background: var(--accent-color); color: white; align-self: flex-start; }
+        .view-details-btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: none; border: 1px solid var(--accent-color); color: var(--accent-color); padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; margin-top: 1.5rem; width: 100%; }
+        .view-details-btn:hover { background: var(--accent-color); color: white; }
+        .view-details-btn .btn-icon { transition: transform 0.3s ease; }
+        .medicine-card.active .view-details-btn .btn-icon { transform: rotate(180deg); }
+        .medicine-details-expandable { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; margin-top: 1.5rem; font-size: 0.9rem; color: var(--secondary-text-color); }
+        .medicine-details-expandable p { display: flex; gap: 0.75rem; margin-bottom: 0.75rem; align-items: flex-start; }
+        .medicine-details-expandable .fas { color: var(--accent-color); margin-top: 4px; }
+        .medicine-card.active .medicine-details-expandable { max-height: 1000px; }
 
         .final-cta {
             padding: 80px 0;
@@ -441,6 +462,33 @@
             </div>
         </section>
         
+        <section id="founders" class="section bg-white">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2>Meet the Founders</h2>
+                </div>
+                <div class="founders-grid">
+                    <div class="founder-card glass-card reveal staggered-1">
+                        <div class="founder-image">
+                            <img src="https://via.placeholder.com/150" alt="Amit">
+                        </div>
+                        <div class="founder-info">
+                            <h3>Amit</h3>
+                            <p>Co-Founder</p>
+                        </div>
+                    </div>
+                    <div class="founder-card glass-card reveal staggered-2">
+                        <div class="founder-image">
+                            <img src="https://via.placeholder.com/150" alt="Shilpi Tiwari">
+                        </div>
+                        <div class="founder-info">
+                            <h3>Shilpi Tiwari</h3>
+                            <p>Co-Founder</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="section">
             <div class="container reveal">
                 <div class="final-cta">
@@ -561,11 +609,159 @@
         document.addEventListener('DOMContentLoaded', function() {
             // --- DATA ---
             const medicines = {
-                contraceptive: [{ name: "Yasmin", generic: "Drospirenone + Ethinyl Estradiol", price: "$45.99"}, { name: "Mirena IUD", generic: "Levonorgestrel IUS", price: "$899.99"}, { name: "Plan B One-Step", generic: "Levonorgestrel", price: "$49.99"}, { name: "NuvaRing", generic: "Etonogestrel/Ethinyl Estradiol", price: "$199.99"}],
-                hormonal: [{ name: "Premarin", generic: "Conjugated Estrogens", price: "$156.99"}, { name: "Prometrium", generic: "Progesterone", price: "$89.99"}, { name: "Lupron Depot", generic: "Leuprolide Acetate", price: "$1,299.99"}, { name: "Spironolactone", generic: "Spironolactone", price: "$35.99"}],
-                fertility: [{ name: "Clomid", generic: "Clomiphene Citrate", price: "$67.99"}, { name: "Gonal-F", generic: "Follitropin Alfa", price: "$879.99"}, { name: "Ovidrel", generic: "Choriogonadotropin Alfa", price: "$289.99"}, { name: "Letrozole", generic: "Letrozole", price: "$43.99"}],
-                prenatal: [{ name: "PregVit", generic: "Prenatal Vitamins + DHA", price: "$34.99"}, { name: "Diclegis", generic: "Doxylamine/Pyridoxine", price: "$178.99"}, { name: "Makena", generic: "Hydroxyprogesterone", price: "$689.99"}, { name: "Iron Sulfate", generic: "Ferrous Sulfate", price: "$12.99"}]
-            };
+    "contraceptive": [
+        {
+            "name": "Mala-D",
+            "generic": "Levonorgestrel + Ethinyl Estradiol",
+            "price": "₹50-70 (for a strip of 28 tablets)",
+            "manufacturer": "HLL Lifecare Limited",
+            "common_uses": "Mala-D is an oral contraceptive pill used to prevent pregnancy. It also helps in regulating menstrual periods and can relieve symptoms of premenstrual syndrome (PMS). It is a combination pill with 21 hormonal tablets and 7 iron/folic acid tablets. [2, 10, 22, 23, 33]",
+            "side_effects": "Common side effects include vaginal infections or inflammation, vaginal discharge, unusual spotting or bleeding between periods, breast tenderness, mood changes, low sex drive, weight changes, nausea, headache, abdominal pain, constipation, and fatigue. [2, 10, 22, 23, 33]",
+            "dosage_form": "Tablet (Oral)"
+        },
+        {
+            "name": "Saheli",
+            "generic": "Ormeloxifene",
+            "price": "₹100-150 (for a strip of 8 tablets)",
+            "manufacturer": "HLL Lifecare Limited",
+            "common_uses": "Saheli is a non-steroidal oral contraceptive, often referred to as a 'weekly pill'. It is used to prevent pregnancy and is also prescribed for the management of dysfunctional uterine bleeding. [29]",
+            "side_effects": "Possible side effects include irregular menstrual bleeding, weight gain, nausea, and headache. [29]",
+            "dosage_form": "Tablet (Oral)"
+        },
+        {
+            "name": "I-Pill",
+            "generic": "Levonorgestrel",
+            "price": "₹75-100 (for a single tablet)",
+            "manufacturer": "Cipla Ltd.",
+            "common_uses": "I-Pill is an emergency contraceptive pill used to prevent unintended pregnancy after unprotected sexual intercourse or contraceptive failure. It should be taken as soon as possible, preferably within 12 hours, and not later than 72 hours (3 days) of unprotected sex. [39]",
+            "side_effects": "Common side effects include nausea, vomiting, lower abdominal pain, tiredness, headache, dizziness, breast tenderness, and irregular periods. Unexpected vaginal bleeding may also occur. [39]",
+            "dosage_form": "Tablet (Oral, single dose)"
+        },
+        {
+            "name": "Unwanted-72",
+            "generic": "Levonorgestrel",
+            "price": "₹75-100 (for a single tablet)",
+            "manufacturer": "Mankind Pharma Pvt Ltd.",
+            "common_uses": "Unwanted-72 is an emergency contraceptive tablet used to prevent unintended pregnancy following unprotected sexual intercourse or contraceptive failure. Its effectiveness is highest when taken within 72 hours (3 days) of the event. [3, 13, 24, 28, 39]",
+            "side_effects": "Common side effects include nausea, vomiting, lower abdominal pain, tiredness, headache, diarrhea, dizziness, uterine bleeding, breast tenderness, and irregular periods. [3, 13, 24, 28, 39]",
+            "dosage_form": "Tablet (Oral, single dose)"
+        }
+    ],
+    "hormonal": [
+        {
+            "name": "Duphaston",
+            "generic": "Dydrogesterone",
+            "price": "₹650-970 (for a strip of 10 tablets)",
+            "manufacturer": "Abbott India Ltd.",
+            "common_uses": "Duphaston is a hormonal medication that mimics the action of natural progesterone. It is used to treat various menstrual conditions such as unusual menstrual bleeding or pain, irregular periods, and premenstrual syndrome (PMS). It also treats endometriosis, supports female infertility, prevents threatened or habitual abortions, and is a component in hormone replacement therapy (HRT) for menopause symptoms. [6, 25, 34, 40, 46]",
+            "side_effects": "Common side effects include nausea, headache, abnormal vaginal discharge, breast pain and tenderness, mood swings, depression, acne, abdominal pain, back pain, vaginal bleeding or spotting, dizziness, drowsiness, and weight gain. [6, 25, 34, 40, 46]",
+            "dosage_form": "Tablet (Oral)"
+        },
+        {
+            "name": "Susten",
+            "generic": "Progesterone (Micronized)",
+            "price": "₹300-450 (for a strip of 10 soft gelatin capsules 200mg)",
+            "manufacturer": "Sun Pharmaceutical Industries Ltd.",
+            "common_uses": "Susten contains progesterone, a female hormone crucial for regulating ovulation and menstruation. It is used in the treatment of female infertility (e.g., luteal phase support in ART cycles), hormone replacement therapy (HRT) for menopausal symptoms, secondary amenorrhea (absence of periods), abnormal uterine bleeding, and to prevent premature labor or miscarriage. [4, 20, 35, 36, 44]",
+            "side_effects": "Side effects can include headache, mood swings, vaginal discharge, breast pain or tenderness, muscle or joint pain, constipation, depression, breast lumps, nausea, vomiting, dizziness, drowsiness, bloating, and irregular vaginal bleeding or spotting. [4, 20, 35, 36, 44]",
+            "dosage_form": "Soft Gelatin Capsule (Oral or Vaginal)"
+        },
+        {
+            "name": "Letroz",
+            "generic": "Letrozole",
+            "price": "₹150-200 (for a strip of 5 tablets 2.5mg)",
+            "manufacturer": "Sun Pharmaceutical Industries Ltd.",
+            "common_uses": "Letroz is an aromatase inhibitor primarily used to treat breast cancer in postmenopausal women by lowering estrogen levels. It is also widely used off-label for the induction of ovulation in female infertility, particularly in women with polycystic ovary syndrome (PCOS). [14, 29, 41, 43, 48]",
+            "side_effects": "Common side effects include hot flushes, increased sweating, joint pain, tiredness, weakness, hypercholesterolemia (high cholesterol), dizziness, headache, nausea, abdominal pain or cramping, hair loss, swelling in extremities, vaginal spotting, and weight gain. [14, 29, 41, 43, 48]",
+            "dosage_form": "Tablet (Oral)"
+        },
+        {
+            "name": "Deviry",
+            "generic": "Medroxyprogesterone Acetate",
+            "price": "₹100-150 (for a strip of 10 tablets 10mg)",
+            "manufacturer": "Torrent Pharmaceuticals Ltd.",
+            "common_uses": "Deviry is a progestin hormone used to treat various menstrual disorders such as amenorrhea (absence of menstruation), irregular periods, heavy or prolonged uterine bleeding, and endometriosis. It can also be used to decrease the risk of endometrial hyperplasia and, in some contexts, to prevent pregnancy. [5, 16, 17, 19, 21, 41]",
+            "side_effects": "Possible side effects include headache, nausea, stomach pain, vaginal spotting, dizziness, breast tenderness, hair loss, acne, unusual vaginal bleeding or spotting, weight gain, bloating, constipation, chest pain, hot flashes, and vaginal discharge. [5, 16, 17, 19, 21, 41]",
+            "dosage_form": "Tablet (Oral)"
+        }
+    ],
+    "fertility": [
+        {
+            "name": "Clomifert",
+            "generic": "Clomiphene Citrate",
+            "price": "₹80-120 (for a strip of 10 tablets 50mg)",
+            "manufacturer": "Macleods Pharmaceuticals Ltd.",
+            "common_uses": "Clomifert is an ovulation stimulant used to treat female infertility caused by anovulation (lack of ovulation) or irregular menstrual cycles, often seen in conditions like PCOS. It works by stimulating the production of hormones necessary for egg development and release. [7]",
+            "side_effects": "Common side effects include hot flashes (flushing), ovarian enlargement, abdominal discomfort, nausea, vomiting, headache, and visual disturbances (e.g., blurred vision, spots). [7]",
+            "dosage_form": "Tablet (Oral)"
+        },
+        {
+            "name": "Fertigyn HP 5000 Injection",
+            "generic": "Human Chorionic Gonadotropin (hCG)",
+            "price": "₹1500-2500 (per vial 5000 IU)",
+            "manufacturer": "Sun Pharmaceutical Industries Ltd.",
+            "common_uses": "Fertigyn HP 5000 Injection is used in the treatment of female infertility to trigger ovulation after follicular development. It is also used in male hypogonadism to stimulate testosterone production and spermatogenesis, and for cryptorchidism (undescended testes) in boys. [11, 18, 26, 30, 31]",
+            "side_effects": "Side effects can include pain at the injection site, headache, irritability, restlessness, depression, fatigue, edema (swelling), early puberty (in boys), and gynecomastia (swelling of breast tissue in men). In women, there's a risk of Ovarian Hyperstimulation Syndrome (OHSS) with symptoms like severe pelvic pain, nausea, vomiting, rapid weight gain, and trouble breathing. [11, 18, 26, 30, 31]",
+            "dosage_form": "Injection (Powder for reconstitution)"
+        },
+        {
+            "name": "Follitrop",
+            "generic": "Urofollitropin (Follicle-Stimulating Hormone - FSH)",
+            "price": "₹1000-3000+ (per injection, depending on IU)",
+            "manufacturer": "Bharat Serums and Vaccines Ltd.",
+            "common_uses": "Follitrop contains Urofollitropin, a form of Follicle-Stimulating Hormone (FSH). It is used in female infertility to stimulate the development of multiple follicles in the ovaries, particularly in women undergoing assisted reproductive technologies (ART) like IVF, or for ovulation induction. [7]",
+            "side_effects": "Potential side effects include Ovarian Hyperstimulation Syndrome (OHSS), abdominal pain, headache, and injection site reactions. [7]",
+            "dosage_form": "Injection (Powder for reconstitution)"
+        },
+        {
+            "name": "Fertomid",
+            "generic": "Clomiphene Citrate",
+            "price": "₹80-120 (for a strip of 10 tablets 50mg)",
+            "manufacturer": "Cipla Ltd.",
+            "common_uses": "Fertomid is an ovulation stimulant prescribed for female infertility, especially in women who do not ovulate properly or have irregular/absent menstrual cycles, such as those with PCOS. It works by stimulating hormones responsible for ovulation. It can also be used in certain cases of male infertility to stimulate sperm production. [7, 9, 15, 27, 38]",
+            "side_effects": "Common side effects include hot flashes (flushing), headache, tiredness, dizziness, breast pain or tenderness, heavy periods, bleeding between periods, nausea, vomiting, blurred vision, ovarian enlargement, abdominal discomfort, and mood swings. [7, 9, 15, 27, 38]",
+            "dosage_form": "Tablet (Oral)"
+        }
+    ],
+    "prenatal": [
+        {
+            "name": "Folvite",
+            "generic": "Folic Acid",
+            "price": "₹40-60 (for a strip of 45 tablets 5mg)",
+            "manufacturer": "Pfizer Ltd.",
+            "common_uses": "Folvite is a folic acid (Vitamin B9) supplement. It is primarily used to treat and prevent folic acid deficiency anemia. Crucially, it is prescribed before and during pregnancy to decrease the risk of neural tube defects (birth defects of the brain and spinal cord) in the developing fetus. It also serves as a general nutritional supplement during pregnancy and breastfeeding. [12, 18, 24, 27, 48]",
+            "side_effects": "Generally well-tolerated, but some may experience nausea, black stool, constipation, loss of appetite, bloating, flatulence (gas), irritability, and difficulty concentrating. [12, 18, 24, 27, 48]",
+            "dosage_form": "Tablet (Oral)"
+        },
+        {
+            "name": "Orofer-XT",
+            "generic": "Ferrous Ascorbate + Folic Acid",
+            "price": "₹170-300 (for a strip of 10-15 tablets)",
+            "manufacturer": "Emcure Pharmaceuticals Ltd.",
+            "common_uses": "Orofer-XT is a combination supplement of iron (Ferrous Ascorbate) and folic acid. It is widely used to treat iron deficiency anemia, particularly during pregnancy and lactation, where there is an increased demand for these nutrients. It supports the production of healthy red blood cells and hemoglobin. [17, 39, 47, 49, 51]",
+            "side_effects": "Common side effects include vomiting, nausea, stomach upset, dark-colored stool, constipation, abdominal pain, irritability, depression, changes in menstrual cycle, and unexplained weight change. [17, 39, 47, 49, 51]",
+            "dosage_form": "Tablet (Oral)"
+        },
+        {
+            "name": "D-Rise",
+            "generic": "Cholecalciferol (Vitamin D3)",
+            "price": "₹30-50 (per sachet 60000 IU)",
+            "manufacturer": "USV Pvt Ltd.",
+            "common_uses": "D-Rise contains high-dose Vitamin D3 and is used to treat and prevent Vitamin D deficiency. It is also prescribed as supportive therapy for conditions like osteoporosis (weak and brittle bones) and hypocalcaemia (low calcium levels), as Vitamin D is essential for calcium absorption. [8, 32, 45, 47, 49, 50]",
+            "side_effects": "Generally well-tolerated. However, excessive intake can lead to symptoms of hypercalcemia (high blood calcium) such as constipation, nausea, vomiting, stomach upset, loss of appetite, weakness, muscle pain, and a metallic taste in the mouth. [8, 32, 45, 47, 49, 50]",
+            "dosage_form": "Granules in Sachet (Oral)"
+        },
+        {
+            "name": "Calcirol",
+            "generic": "Cholecalciferol (Vitamin D3)",
+            "price": "₹30-50 (per sachet 60000 IU)",
+            "manufacturer": "Cadila Pharmaceuticals Ltd.",
+            "common_uses": "Calcirol is a Vitamin D3 supplement used to treat and prevent Vitamin D deficiency. It is crucial for maintaining blood calcium and phosphorus levels and for the mineralization of bone. It effectively treats conditions like osteoporosis, osteomalacia (Rickets), hypoparathyroidism, and latent tetany. [12, 32, 37, 42, 51]",
+            "side_effects": "Side effects are usually mild but can include constipation, nausea, vomiting, stomach upset. Overdose can lead to hypercalcemia with symptoms like increased blood calcium and urine calcium levels, and mental confusion. [12, 32, 37, 42, 51]",
+            "dosage_form": "Granules in Sachet (Oral)"
+        }
+    ]
+};
 
             // --- MOBILE NAVIGATION ---
             const navToggle = document.getElementById('mobile-nav-toggle');
@@ -615,10 +811,16 @@
                         </div>
                         <div class="medicine-price">${med.price}</div>
                     </div>
-                    <button class="add-to-cart">
-                        <span class="text">Add to Cart</span>
-                        <span class="icon"><i class="fas fa-check"></i></span>
+                    <button class="view-details-btn">
+                        <span class="btn-text">View Details</span>
+                        <i class="fas fa-chevron-down btn-icon"></i>
                     </button>
+                    <div class="medicine-details-expandable">
+                        <p><i class="fas fa-industry"></i> <strong>Manufacturer:</strong> ${med.manufacturer}</p>
+                        <p><i class="fas fa-pills"></i> <strong>Dosage Form:</strong> ${med.dosage_form}</p>
+                        <p><i class="fas fa-notes-medical"></i> <strong>Common Uses:</strong> ${med.common_uses}</p>
+                        <p><i class="fas fa-exclamation-triangle"></i> <strong>Side Effects:</strong> ${med.side_effects}</p>
+                    </div>
                 </div>`;
 
             const displayMedicines = (category) => {
@@ -653,10 +855,10 @@
             });
 
             medicineContent.addEventListener('click', (e) => {
-                const button = e.target.closest('.add-to-cart');
-                if (button && !button.classList.contains('added')) {
-                    button.classList.add('added');
-                    setTimeout(() => button.classList.remove('added'), 2000);
+                const detailsButton = e.target.closest('.view-details-btn');
+                if (detailsButton) {
+                    const card = detailsButton.closest('.medicine-card');
+                    card.classList.toggle('active');
                 }
             });
 
